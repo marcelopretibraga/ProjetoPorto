@@ -22,4 +22,28 @@ export class ContainerService extends BaseService{
       .catch((error: any) => Observable.throw(error.error));
   }
 
+  update(container: any) : Observable<any>{
+    console.log(container)
+    //Primeiro Parâmetro === URL
+    //Segundo Parâmetro === BODY - Corpo da Requisição
+    return this.http.put(environment.urlWebAPI + "Container/"+container.containerId,
+     container).catch((error: any) => Observable.throw(error.error));
+  }
+
+  listAll() : Observable<any>{
+    return this.http.get(environment.urlWebAPI + "Container/")
+      .catch((error: any) => Observable.throw(error.error));
+  }
+
+  remove(id: number) : Observable<any>{
+    return this.http.delete(environment.urlWebAPI + "Container/"+id)
+      .catch((error: any) => Observable.throw(error.error));
+  }
+
+  getById(id: number) : Observable<any>{
+    return this.http.get(environment.urlWebAPI + "Container/"+id)
+      .catch((error: any) => Observable.throw(error.error));
+  }
+
+
 }

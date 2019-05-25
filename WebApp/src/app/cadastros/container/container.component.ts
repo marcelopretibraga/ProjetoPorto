@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Container } from './model/container';
 import { ContainerService } from './container.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -9,24 +10,50 @@ import { ContainerService } from './container.service';
 })
 export class ContainerComponent implements OnInit {
   containerModel: Container;
+  edit : boolean;
 
-  constructor(private containerService: ContainerService) { }
+  constructor(private containerService: ContainerService, 
+             private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.containerModel = new Container();
+    this.activeRoute.params.subscribe(param => {
+      if (param.id != undefined){//verificar se e edição
+        this.getById(param.id);
+        this.edit = true;
+      }        
+    });
+
   }
 
-  salvar(){
-    console.log("salvar container")
-    console.log(this.containerModel)
-    this.containerService.save(this.containerModel).subscribe(sucesso => {
-      if (sucesso != null) 
-        console.log("sucesso");
-      
-    },
-    error => {
-      console.log("Erro");
+  getById(id :number){
+    this.containerService.getById(id).subscribe(sucesso => {
+      if (sucesso) 
+        this.containerModel = sucesso;
+    }, error => {
+      console.log(error);
     });
+  }
+
+
+  salvar(){
+    if (!this.edit){
+      this.containerService.save(this.containerModel).subscribe(sucesso => {
+        if (sucesso) 
+          console.log("sucesso");
+      },
+      error => {
+        console.log("Erro");
+      });
+    }else {
+      this.containerService.update(this.containerModel).subscribe(sucesso => {
+        if (sucesso) 
+          console.log("sucesso");
+      },
+      error => {
+        console.log("Erro");
+      });
+    }
   }
 
 }

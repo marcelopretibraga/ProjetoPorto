@@ -79,7 +79,7 @@ namespace PortoAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(container);
         }
 
         // POST: api/Container

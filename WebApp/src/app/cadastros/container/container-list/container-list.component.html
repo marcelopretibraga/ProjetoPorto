@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col s12 m12 l12">  
+    <mat-table #table [dataSource]="dataSource" matSort class="table-striped">
+
+      <ng-container matColumnDef="actionsColumn">
+          <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <button mat-icon-button>
+                  <mat-icon class="link_action"  matTooltip="Excluir" (click)="deleteConfirmation(element.containerId)">delete</mat-icon>
+              </button>  
+              <button mat-icon-button>
+                  <mat-icon class="link_action"  matTooltip="Editar" (click)="callUpdate(element.containerId)">edit</mat-icon>
+              </button>
+
+
+          </mat-cell>
+        </ng-container>   
+
+      <ng-container matColumnDef="containerId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.containerId}} </mat-cell>>
+      </ng-container>
+  
+      <ng-container matColumnDef="descricao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descricao}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="largura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Largura </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.largura}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="altura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Altura </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.altura}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="comprimento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Comprimento </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.comprimento}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="capacidade">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Capacidade </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.capacidade}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dtVencimento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Vencimento </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dtVencimento}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tipo}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>  
+    <mat-paginator #paginator [pageSize]="2" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>  
+  </div>
+</div>

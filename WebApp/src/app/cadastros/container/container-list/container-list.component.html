@@ -1,4 +1,11 @@
 <div class="row">
+  <button mat-icon-button class="direita"> 
+    <mat-icon  (click)="callNew()">add_circle_outline</mat-icon>
+  </button>
+</div>
+
+
+<div class="row">
   <div class="col s12 m12 l12">  
     <mat-table #table [dataSource]="dataSource" matSort class="table-striped">
 
@@ -48,8 +55,17 @@
 
       <ng-container matColumnDef="dtVencimento">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Vencimento </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.dtVencimento}} </mat-cell>
+        <mat-cell *matCellDef="let element"> 
+            {{datePipe.transform(element.dtVencimento,'dd/MM/yyyy HH:mm')}}
+        </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="dtCadastro">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cadastro </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+              {{datePipe.transform(element.dtCadastro,'dd/MM/yyyy HH:mm')}}
+          </mat-cell>
+        </ng-container>
 
       <ng-container matColumnDef="tipo">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>

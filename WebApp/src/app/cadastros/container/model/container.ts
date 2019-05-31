@@ -7,4 +7,5 @@ export class Container{
     capacidade:	number;
     dtVencimento: Date;
     tipo: number;
+    dtCadastro: Date;
 }

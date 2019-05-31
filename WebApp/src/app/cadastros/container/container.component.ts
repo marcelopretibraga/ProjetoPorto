@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Container } from './model/container';
 import { ContainerService } from './container.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router,  } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -13,7 +13,8 @@ export class ContainerComponent implements OnInit {
   edit : boolean;
 
   constructor(private containerService: ContainerService, 
-             private activeRoute: ActivatedRoute) { }
+             private activeRoute: ActivatedRoute, 
+             public router: Router) { }
 
   ngOnInit() {
     this.containerModel = new Container();
@@ -40,7 +41,8 @@ export class ContainerComponent implements OnInit {
     if (!this.edit){
       this.containerService.save(this.containerModel).subscribe(sucesso => {
         if (sucesso) 
-          console.log("sucesso");
+          this.back();
+          
       },
       error => {
         console.log("Erro");
@@ -48,7 +50,7 @@ export class ContainerComponent implements OnInit {
     }else {
       this.containerService.update(this.containerModel).subscribe(sucesso => {
         if (sucesso) 
-          console.log("sucesso");
+          this.back();
       },
       error => {
         console.log("Erro");
@@ -56,4 +58,8 @@ export class ContainerComponent implements OnInit {
     }
   }
 
+  back() {
+    this.router.navigate(['../container-list']);
+  }
+   
 }

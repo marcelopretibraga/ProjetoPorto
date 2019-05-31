@@ -4,6 +4,7 @@ import { Container } from '../model/container';
 import { Router } from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-container-list',
@@ -13,14 +14,15 @@ import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component'
 export class ContainerListComponent implements OnInit {
 
   public displayedColumns = ['actionsColumn','containerId', 'descricao', 'largura',
-   'altura', 'comprimento', 'capacidade', 'dtVencimento', 'tipo'];
+   'altura', 'comprimento', 'capacidade', 'dtVencimento', 'tipo', 'dtCadastro'];
   private dataSource: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private containerService: ContainerService, 
               private router: Router,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog, 
+              private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.listAll();
@@ -43,6 +45,10 @@ export class ContainerListComponent implements OnInit {
 
   callUpdate(id: number){
     this.router.navigate(['../container-edit/'+id]);
+  }
+
+  callNew(){
+    this.router.navigate(['../container']);
   }
 
   deleteConfirmation(id: number) { 

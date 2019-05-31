@@ -60,6 +60,7 @@ namespace PortoAPI.Controllers
             {
                 return BadRequest();
             }
+            container.DtAtualizacao = DateTime.Now;
 
             _context.Entry(container).State = EntityState.Modified;
 
@@ -90,6 +91,8 @@ namespace PortoAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            container.DtAtualizacao = DateTime.Now;
+            container.DtCadastro = DateTime.Now;
 
             _context.Container.Add(container);
             await _context.SaveChangesAsync();

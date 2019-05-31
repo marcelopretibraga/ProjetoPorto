@@ -11,6 +11,7 @@ import { MatInputModule, MatRadioModule, MatButtonModule,
 import { ContainerComponent } from './cadastros/container/container.component';
 import { ContainerListComponent } from './cadastros/container/container-list/container-list.component';
 import { DialogComponent } from './shared/dialog/dialog/dialog.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { DialogComponent } from './shared/dialog/dialog/dialog.component';
     MatSelectModule, 
     MatDialogModule
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, DatePipe],
   //Geralmente usa Dialog, Spinner e Message
   entryComponents: [
     DialogComponent

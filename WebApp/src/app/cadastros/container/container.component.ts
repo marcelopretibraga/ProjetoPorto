@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Container } from './model/container';
 import { ContainerService } from './container.service';
 import { ActivatedRoute, Router,  } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-container',
@@ -14,7 +15,8 @@ export class ContainerComponent implements OnInit {
 
   constructor(private containerService: ContainerService, 
              private activeRoute: ActivatedRoute, 
-             public router: Router) { }
+             public router: Router, 
+             public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.containerModel = new Container();
@@ -36,24 +38,29 @@ export class ContainerComponent implements OnInit {
     });
   }
 
-
   salvar(){
+    this.spinner.show();
     if (!this.edit){
       this.containerService.save(this.containerModel).subscribe(sucesso => {
-        if (sucesso) 
+        if (sucesso) {
+          this.spinner.hide();
           this.back();
-          
+        }
       },
       error => {
         console.log("Erro");
+        this.spinner.hide();
       });
     }else {
       this.containerService.update(this.containerModel).subscribe(sucesso => {
-        if (sucesso) 
+        if (sucesso){
+          this.spinner.hide();
           this.back();
+        }           
       },
       error => {
         console.log("Erro");
+        this.spinner.hide();
       });
     }
   }

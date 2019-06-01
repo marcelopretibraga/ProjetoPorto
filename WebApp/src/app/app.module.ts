@@ -12,6 +12,7 @@ import { ContainerComponent } from './cadastros/container/container.component';
 import { ContainerListComponent } from './cadastros/container/container-list/container-list.component';
 import { DialogComponent } from './shared/dialog/dialog/dialog.component';
 import { DatePipe } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DatePipe } from '@angular/common';
     MatSortModule,
     MatExpansionModule, 
     MatSelectModule, 
-    MatDialogModule
+    MatDialogModule, 
+    NgxSpinnerModule
   ],
   providers: [HttpClient, DatePipe],
   //Geralmente usa Dialog, Spinner e Message

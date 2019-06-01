@@ -22,7 +22,7 @@ export class ContainerListComponent implements OnInit {
   constructor(private containerService: ContainerService, 
               private router: Router,
               private dialog: MatDialog, 
-              private datePipe: DatePipe) { }
+              private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.listAll();
@@ -38,7 +38,6 @@ export class ContainerListComponent implements OnInit {
         }
       },
         error => {
-          
         }
       )
   }
